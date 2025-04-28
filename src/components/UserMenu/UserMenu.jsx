@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./UserMenu.module.css";
-import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
+import { selectUserName } from "../../redux/auth/selectors";
+import { logoutThunk } from "../../redux/auth/operations";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUserName);
 
   const handleLogout = () => {
-    dispatch(selectIsLoggedIn());
+    dispatch(logoutThunk());
   };
 
   return (

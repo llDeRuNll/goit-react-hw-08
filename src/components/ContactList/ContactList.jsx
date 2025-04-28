@@ -1,7 +1,7 @@
 import { selectFilteredContacts } from "../../redux/filters/selectors";
 import Contact from "../Contact/Contact";
-import styles from "./ContactList.module.css";
 import { useSelector } from "react-redux";
+import { Box, Grid, Typography } from "@mui/material";
 
 const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
@@ -9,18 +9,31 @@ const ContactList = () => {
   const isError = useSelector((state) => state.contacts.isError);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <Typography variant="h5" align="center">
+        Loading...
+      </Typography>
+    );
   }
 
   if (isError) {
-    return <h1>Something went wrong. Please try again later.</h1>;
+    return (
+      <Typography variant="h5" align="center">
+        Something went wrong. Please try again later.
+      </Typography>
+    );
   }
+
   return (
-    <ul className={styles.list}>
-      {filteredContacts.map(({ id, number, name }) => (
-        <Contact key={id} id={id} number={number} name={name} />
-      ))}
-    </ul>
+    <Box sx={{ padding: "1rem" }}>
+      <Grid container spacing={2}>
+        {filteredContacts.map(({ id, number, name }) => (
+          <li key={id}>
+            <Contact id={id} name={name} number={number} />
+          </li>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

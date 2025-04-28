@@ -27,10 +27,10 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? null : (
-    <Layout>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Homepage />} />
           <Route
             path="/register"
             element={
@@ -55,10 +55,10 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </Layout>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 }
 

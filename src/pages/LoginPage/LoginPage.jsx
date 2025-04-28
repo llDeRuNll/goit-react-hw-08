@@ -1,11 +1,11 @@
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
-const RegistrationPage = () => {
+const LoginPage = () => {
   return (
     <>
-      <RegistrationForm />
+      <LoginForm />
     </>
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;

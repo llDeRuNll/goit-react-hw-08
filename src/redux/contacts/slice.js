@@ -9,8 +9,8 @@ const slice = createSlice({
   name: "contacts",
   initialState: {
     items: [],
-    loading: false,
-    error: null,
+    isLoading: false,
+    isError: false,
   },
   extraReducers: (builder) => {
     builder

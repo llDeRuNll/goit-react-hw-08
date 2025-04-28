@@ -1,8 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import styles from "./LoginForm.module.css";
+import { TextField, Button, Box, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/auth/operations";
+import { loginThunk } from "../../redux/auth/operations";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const LoginForm = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(login(values));
+    dispatch(loginThunk(values));
     resetForm();
   };
 
@@ -30,26 +30,81 @@ const LoginForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={styles.form}>
-        <label>
-          Email
-          <Field type="email" name="email" className={styles.input} />
-          <ErrorMessage name="email" component="div" className={styles.error} />
-        </label>
+      <Form>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            maxWidth: 400,
+            margin: "0 auto",
+            padding: "2rem",
+            backgroundColor: "#fff",
+            borderRadius: "10px",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+            Login
+          </Typography>
 
-        <label>
-          Password
-          <Field type="password" name="password" className={styles.input} />
-          <ErrorMessage
-            name="password"
-            component="div"
-            className={styles.error}
+          <Field
+            name="email"
+            as={TextField}
+            label="Email"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            required
+            error={false}
+            helperText={<ErrorMessage name="email" />}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderColor: "#ccc",
+              },
+              "& .MuiFormHelperText-root": {
+                color: "#e74c3c",
+              },
+            }}
           />
-        </label>
 
-        <button type="submit" className={styles.button}>
-          Login
-        </button>
+          <Field
+            name="password"
+            as={TextField}
+            label="Password"
+            type="password"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            required
+            error={false}
+            helperText={<ErrorMessage name="password" />}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderColor: "#ccc",
+              },
+              "& .MuiFormHelperText-root": {
+                color: "#e74c3c",
+              },
+            }}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              backgroundColor: "#5e9bff",
+              "&:hover": {
+                backgroundColor: "#4187d3",
+              },
+              width: "100%",
+              padding: "1rem",
+              marginTop: "1rem",
+            }}
+          >
+            Login
+          </Button>
+        </Box>
       </Form>
     </Formik>
   );
