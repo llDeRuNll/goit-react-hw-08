@@ -3,7 +3,7 @@ import {
   addContactThunk,
   deleteContactThunk,
   fetchContactsThunk,
-} from "./contactsOps";
+} from "./operations";
 
 const slice = createSlice({
   name: "contacts",
